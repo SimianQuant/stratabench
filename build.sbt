@@ -29,6 +29,7 @@ lazy val stratabench = project
       "com.opengamma.strata" % "strata-measure" % Settings.versions.strata,
       "com.opengamma.strata" % "strata-report" % Settings.versions.strata,
       "com.opengamma.strata" % "strata-loader" % Settings.versions.strata
-    )
+    ),
+    resourceDirectory in Jmh := (resourceDirectory in Compile).value
   )
   .enablePlugins(JmhPlugin)
