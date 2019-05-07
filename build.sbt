@@ -26,7 +26,9 @@ lazy val stratabench = project
       "-Xfuture"
     ),
     libraryDependencies ++= Seq(
-      "com.opengamma.strata" % "strata-measure" % Settings.versions.strata
+      "com.opengamma.strata" % "strata-measure" % Settings.versions.strata,
+      "com.opengamma.strata" % "strata-report" % Settings.versions.strata,
+      "com.opengamma.strata" % "strata-loader" % Settings.versions.strata
     )
   )
   .enablePlugins(JmhPlugin)
