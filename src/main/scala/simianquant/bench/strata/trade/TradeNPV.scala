@@ -8,6 +8,7 @@ import com.opengamma.strata.calc.{CalculationRules, CalculationRunner, Column, R
 import com.opengamma.strata.examples.marketdata.ExampleMarketData
 import com.opengamma.strata.measure.{Measures, StandardComponents}
 import org.openjdk.jmh.annotations._
+import simianquant.bench.strata.SampleTrades
 
 object TradeNPVData {
 

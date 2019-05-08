@@ -1,4 +1,4 @@
-package simianquant.bench.strata
+package simianquant.bench.strata.trade
 
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
@@ -8,6 +8,7 @@ import com.opengamma.strata.calc.{CalculationRules, CalculationRunner, Column, R
 import com.opengamma.strata.examples.marketdata.ExampleMarketData
 import com.opengamma.strata.measure.{Measures, StandardComponents}
 import org.openjdk.jmh.annotations._
+import simianquant.bench.strata.SampleTrades
 
 object TradePV01Data {
 
@@ -17,11 +18,9 @@ object TradePV01Data {
     private val marketDataBuilder = ExampleMarketData.builder();
     val marketData = marketDataBuilder.buildSnapshot(valuationDate);
 
-    // // the complete set of rules for calculating measures
     val functions = StandardComponents.calculationFunctions();
     val rules = CalculationRules.of(functions, marketDataBuilder.ratesLookup(valuationDate));
 
-    // // the reference data, such as holidays and securities
     val refData = ReferenceData.standard();
   }
 
