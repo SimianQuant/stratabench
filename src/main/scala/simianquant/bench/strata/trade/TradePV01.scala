@@ -1,33 +1,13 @@
 package simianquant.bench.strata.trade
 
-import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 import com.google.common.collect.ImmutableList
-import com.opengamma.strata.basics.ReferenceData
-import com.opengamma.strata.calc.{CalculationRules, CalculationRunner, Column, Results}
-import com.opengamma.strata.examples.marketdata.ExampleMarketData
-import com.opengamma.strata.measure.{Measures, StandardComponents}
+import com.opengamma.strata.calc.{Column, Results}
+import com.opengamma.strata.measure.Measures
 import org.openjdk.jmh.annotations._
 import simianquant.bench.strata.SampleTrades
 
 object TradePV01Data {
-
-  @State(Scope.Benchmark)
-  class MarketDataContainer {
-    private val valuationDate = LocalDate.of(2014, 1, 22);
-    private val marketDataBuilder = ExampleMarketData.builder();
-    val marketData = marketDataBuilder.buildSnapshot(valuationDate);
-
-    val functions = StandardComponents.calculationFunctions();
-    val rules = CalculationRules.of(functions, marketDataBuilder.ratesLookup(valuationDate));
-
-    val refData = ReferenceData.standard();
-  }
-
-  @State(Scope.Thread)
-  class CalculationRunnerMulti {
-    val runner = CalculationRunner.ofMultiThreaded()
-  }
 
   @State(Scope.Benchmark)
   class FxForwardData {
@@ -151,7 +131,7 @@ object TradePV01Data {
 
 }
 
-/** Benchmarks the evaluation of the PV01 of a given trade
+/** Benchmarks the evaluation of the PV01 of a single trade
   *
   * @author Harshad Deo
   */
@@ -160,6 +140,7 @@ object TradePV01Data {
 class TradePV01 {
 
   import TradePV01Data._
+  import BaseTradeData._
 
   @Benchmark
   def fxForward(marketDataContainer: MarketDataContainer,

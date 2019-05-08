@@ -1,7 +1,9 @@
 package simianquant.bench.strata
 
-/** Benchmarking the trades provided in the examples
-*/
-package object trade {
+import java.time.LocalDate
 
+/** Benchmarking the trades provided in the examples
+  */
+package object trade {
+  val valuationDate = LocalDate.of(2014, 1, 22);
 }
