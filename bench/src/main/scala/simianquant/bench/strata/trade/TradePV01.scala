@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableList
 import com.opengamma.strata.calc.{Column, Results}
 import com.opengamma.strata.measure.Measures
 import org.openjdk.jmh.annotations._
-import simianquant.bench.strata.SampleTrades
+import simianquant.strata.setup.SampleTrades
 
 object TradePV01Data {
 

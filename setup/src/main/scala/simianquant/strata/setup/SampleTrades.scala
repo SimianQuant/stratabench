@@ -1,4 +1,4 @@
-package simianquant.bench.strata
+package simianquant.strata.setup
 
 import com.opengamma.strata.basics.currency.Currency.{GBP, USD}
 import com.opengamma.strata.basics.currency.{Currency, CurrencyAmount, FxRate}

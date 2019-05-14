@@ -6,7 +6,7 @@ import com.opengamma.strata.calc.{Column, Results}
 import com.opengamma.strata.measure.Measures
 import com.opengamma.strata.product.Trade
 import org.openjdk.jmh.annotations._
-import simianquant.bench.strata.SampleTrades
+import simianquant.strata.setup.SampleTrades
 
 object VanillaSwapScalingData {
 
