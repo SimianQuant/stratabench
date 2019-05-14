@@ -107,7 +107,7 @@ object SampleTrades {
   // swaps
 
   // create a vanilla fixed vs libor 3m swap
-  def vanillaFixedVsLibor3mSwap: Trade = {
+  def vanillaFixedVsLibor3mSwap: SwapTrade = {
     val tradeInfo = TradeInfo
       .builder()
       .id(StandardId.of("example", "1"))
