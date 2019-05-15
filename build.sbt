@@ -40,6 +40,15 @@ lazy val setup = project
 lazy val jnibridge = project
   .in(file("jnibridge"))
   .settings(commonSettings("jnibridge"))
+  .settings(
+    libraryDependencies ++= Seq(
+      "com.opengamma.strata" % "strata-measure" % Settings.versions.strata % Test,
+      "org.scalatest" %% "scalatest" % Settings.versions.scalatest % Test,
+      "org.scalacheck" %% "scalacheck" % Settings.versions.scalacheck % Test
+    ),
+    testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
+  )
+  .dependsOn(jnibridgeimpl % Runtime)
 
 lazy val jnibridgeimpl = project
   .in(file("jnibridgeimpl"))
