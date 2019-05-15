@@ -36,6 +36,16 @@ lazy val setup = project
     )
   )
 
+lazy val jnibridge = project
+  .in(file("jnibridge"))
+  .settings(commonSettings("jnibridge"))
+  .dependsOn(jnibridgeimpl % Runtime)
+
+lazy val jnibridgeimpl = project
+  .in(file("jnibridgeimpl"))
+  .settings(commonSettings("jnibridgeimpl"))
+  .enablePlugins(JniNative)
+
 lazy val bench = project
   .in(file("bench"))
   .settings(commonSettings("bench"))

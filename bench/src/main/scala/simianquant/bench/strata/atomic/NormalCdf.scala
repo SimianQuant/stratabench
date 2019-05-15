@@ -7,9 +7,9 @@ import org.openjdk.jmh.annotations._
 import simianquant.mathbridge.NormalDistribution
 
 /** Benchmarks three variations of the implementation of Normal Cumulative Distribution Function.
-*
-* @author Harshad Deo
-*/
+  *
+  * @author Harshad Deo
+  */
 @BenchmarkMode(Array(Mode.SampleTime))
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 class NormalCdf {
@@ -22,7 +22,7 @@ class NormalCdf {
   @Benchmark
   def strata(bh: Blackhole): Unit = {
     var x = xlb
-    while(x < xub){
+    while (x < xub) {
       val eval = Probability.normal(1, 0, x)
       bh.consume(eval)
       x += xincr
@@ -32,7 +32,7 @@ class NormalCdf {
   @Benchmark
   def mathbridge(bh: Blackhole): Unit = {
     var x = xlb
-    while(x < xub){
+    while (x < xub) {
       val eval = NormalDistribution.cdf(x)
       bh.consume(eval)
       x += xincr
