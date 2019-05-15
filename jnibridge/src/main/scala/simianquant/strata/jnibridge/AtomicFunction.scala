@@ -16,4 +16,11 @@ class AtomicFunction {
   @native
   def normalCdf(x: Double): Double
 
+  /** Evaluates the standard normal quantile function (inverse CDF)
+    *
+    * @author Harshad Deo
+    */
+  @native
+  def normalQuantile(x: Double): Double
+
 }
