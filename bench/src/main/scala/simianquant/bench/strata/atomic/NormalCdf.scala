@@ -22,7 +22,8 @@ object NormalCdf {
   }
 }
 
-/** Benchmarks three variations of the implementation of Normal Cumulative Distribution Function.
+/** Benchmarks three variations of the implementation of Normal Cumulative Distribution Function by measuring the time
+  * taken to evaluate 65536 values.
   *
   * @author Harshad Deo
   */

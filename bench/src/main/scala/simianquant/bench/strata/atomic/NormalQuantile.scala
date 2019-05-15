@@ -22,7 +22,8 @@ object NormalQuantile {
   }
 }
 
-/** Benchmarks three variations of the implementation of Normal Quantile function
+/** Benchmarks three variations of the implementation of Normal Quantile function by measuring the time taken to
+  * evaluate the function for 65536 values.
   *
   * @author Harshad Deo
   */
