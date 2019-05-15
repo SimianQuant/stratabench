@@ -13,7 +13,7 @@ object NormalCdf {
   class EvalLimits {
     val lb = -4.0
     val ub = 4.0
-    val cnt = 1 << 10
+    val cnt = 1 << 16
   }
 
   @State(Scope.Benchmark)
