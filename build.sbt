@@ -22,7 +22,8 @@ def commonSettings(nameStr: String) = Seq(
     "-Ywarn-nullary-override",
     "-Ywarn-nullary-unit",
     "-Xfuture"
-  )
+  ),
+  fork := true
 )
 
 lazy val setup = project
@@ -39,7 +40,6 @@ lazy val setup = project
 lazy val jnibridge = project
   .in(file("jnibridge"))
   .settings(commonSettings("jnibridge"))
-  .dependsOn(jnibridgeimpl % Runtime)
 
 lazy val jnibridgeimpl = project
   .in(file("jnibridgeimpl"))
@@ -53,7 +53,7 @@ lazy val bench = project
     libraryDependencies += "com.simianquant" %% "mathbridge" % Settings.versions.mathbridge,
     resourceDirectory in Jmh := (resourceDirectory in Compile).value
   )
-  .dependsOn(setup)
+  .dependsOn(setup, jnibridge, jnibridgeimpl % Runtime)
   .enablePlugins(JmhPlugin)
 
 lazy val scratch = project

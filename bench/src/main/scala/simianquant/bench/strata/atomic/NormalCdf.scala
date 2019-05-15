@@ -5,6 +5,22 @@ import java.util.concurrent.TimeUnit
 import org.openjdk.jmh.infra.Blackhole
 import org.openjdk.jmh.annotations._
 import simianquant.mathbridge.NormalDistribution
+import simianquant.strata.jnibridge.AtomicFunction
+
+object NormalCdf {
+
+  @State(Scope.Benchmark)
+  class EvalLimits {
+    val lb = -4.0
+    val ub = 4.0
+    val cnt = 1 << 10
+  }
+
+  @State(Scope.Benchmark)
+  class AtomicFunctionInitialized {
+    final val value = new AtomicFunction
+  }
+}
 
 /** Benchmarks three variations of the implementation of Normal Cumulative Distribution Function.
   *
@@ -14,27 +30,34 @@ import simianquant.mathbridge.NormalDistribution
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 class NormalCdf {
 
-  private val xlb = -7.0
-  private val xub = 7.0
-  private val cnt = 1 << 10
-  private val xincr = (xub - xlb) / cnt
+  import NormalCdf._
 
   @Benchmark
-  def strata(bh: Blackhole): Unit = {
-    var x = xlb
-    while (x < xub) {
-      val eval = Probability.normal(1, 0, x)
-      bh.consume(eval)
+  def strata(lim: EvalLimits, bh: Blackhole): Unit = {
+    var x = lim.lb
+    val xincr = (lim.ub - lim.lb) / lim.cnt
+    while (x < lim.ub) {
+      bh.consume(Probability.normal(0, 1, x))
       x += xincr
     }
   }
 
   @Benchmark
-  def mathbridge(bh: Blackhole): Unit = {
-    var x = xlb
-    while (x < xub) {
-      val eval = NormalDistribution.cdf(x)
-      bh.consume(eval)
+  def mathbridge(lim: EvalLimits, bh: Blackhole): Unit = {
+    var x = lim.lb
+    val xincr = (lim.ub - lim.lb) / lim.cnt
+    while (x < lim.ub) {
+      bh.consume(NormalDistribution.cdf(x))
+      x += xincr
+    }
+  }
+
+  @Benchmark
+  def jni(lim: EvalLimits, afi: AtomicFunctionInitialized, bh: Blackhole): Unit = {
+    var x = lim.lb
+    val xincr = (lim.ub - lim.lb) / lim.cnt
+    while (x < lim.ub) {
+      bh.consume(afi.value.normalCdf(x))
       x += xincr
     }
   }

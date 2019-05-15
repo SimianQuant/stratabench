@@ -7,7 +7,7 @@ import ch.jodersky.jni.nativeLoader
   * @author Harshad Deo
   */
 @nativeLoader("jnibridge0")
-class JniBridge {
+class AtomicFunction {
 
   /** Evaluates the standard cumulative normal distribution
     *
