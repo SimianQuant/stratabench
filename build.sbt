@@ -40,6 +40,7 @@ lazy val bench = project
   .in(file("bench"))
   .settings(commonSettings("bench"))
   .settings(
+    libraryDependencies += "com.simianquant" %% "mathbridge" % Settings.versions.mathbridge,
     resourceDirectory in Jmh := (resourceDirectory in Compile).value
   )
   .dependsOn(setup)
