@@ -10,3 +10,8 @@ be comprehensive, and are written from the perspective of someone using Strata t
 
 For convenience, the benchmarks are written in Scala using [sbt-jmh](https://github.com/ktoso/sbt-jmh).
 
+## Results
+
+A summary of the results is presented on the SimianQuant blog.
+
+1. [Elementary Functions](https://simianquant.com/blog/stratabenchelementary/)
