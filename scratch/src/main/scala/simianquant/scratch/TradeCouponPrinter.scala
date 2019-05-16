@@ -11,22 +11,29 @@ object TradeCouponPrinter {
 
   val refData = ReferenceData.standard();
 
-  def vanillaFixedVsLibor3mSwap() = {
-    val product = SampleTrades.vanillaFixedVsLibor3mSwap.getProduct()
-    val resolvedPayLeg = product.getPayLeg().get().resolve(refData)
-    val resolvedReceiveLeg = product.getReceiveLeg().get().resolve(refData)
+  def printFxForward() = {
+    val product = SampleTrades.fxForward.getProduct()
+    val resolvedProduct = product.resolve(refData)
 
-    val payLegPeriods = resolvedPayLeg.getPaymentPeriods()
-    val receiveLegPeriods = resolvedReceiveLeg.getPaymentPeriods()
-
-    // println(s"Payment")
-
-    // println(payLegPeriods)
-    // println(receiveLegPeriods)
   }
 
+  // def vanillaFixedVsLibor3mSwap() = {
+  //   val product = SampleTrades.vanillaFixedVsLibor3mSwap.getProduct()
+  //   val resolvedPayLeg = product.getPayLeg().get().resolve(refData)
+  //   val resolvedReceiveLeg = product.getReceiveLeg().get().resolve(refData)
+
+  //   val payLegPeriods = resolvedPayLeg.getPaymentPeriods()
+  //   val receiveLegPeriods = resolvedReceiveLeg.getPaymentPeriods()
+
+  //   // println(s"Payment")
+
+  //   // println(payLegPeriods)
+  //   // println(receiveLegPeriods)
+  // }
+
   def main(args: Array[String]): Unit = {
-    vanillaFixedVsLibor3mSwap()
+    printFxForward()
+    // vanillaFixedVsLibor3mSwap()
     println("ho gaya")
   }
 

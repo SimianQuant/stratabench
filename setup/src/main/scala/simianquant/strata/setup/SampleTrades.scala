@@ -19,7 +19,7 @@ import java.time.LocalDate
 
 object SampleTrades {
 
-  def fxForward: Trade = {
+  def fxForward: FxSingleTrade = {
     val fx = FxSingle.of(CurrencyAmount.of(GBP, 10000), FxRate.of(GBP, USD, 1.62), LocalDate.of(2014, 9, 14))
 
     FxSingleTrade
@@ -36,7 +36,7 @@ object SampleTrades {
       .build()
   }
 
-  def fxSwap: Trade = {
+  def fxSwap: FxSwapTrade = {
     val swap = FxSwap.ofForwardPoints(CurrencyAmount.of(GBP, 10000),
                                       FxRate.of(GBP, USD, 1.62),
                                       0.03,
@@ -57,7 +57,7 @@ object SampleTrades {
       .build()
   }
 
-  def fra: Trade = {
+  def fra: FraTrade = {
 
     val fra = Fra
       .builder()
@@ -83,7 +83,7 @@ object SampleTrades {
       .build();
   }
 
-  def bullet: Trade = {
+  def bullet: BulletPaymentTrade = {
     val bp = BulletPayment.builder
       .payReceive(PayReceive.PAY)
       .value(CurrencyAmount.of(GBP, 20000))
