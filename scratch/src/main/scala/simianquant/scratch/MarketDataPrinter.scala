@@ -28,10 +28,12 @@ object MarketDataPrinter {
     val leftExtrapolator = curve.getExtrapolatorLeft.getName
     val rightExtrapolator = curve.getExtrapolatorRight.getName
     val dayCount = curve.getMetadata().getInfo(CurveInfoType.DAY_COUNT)
+    val xValueType = curve.getMetadata().getXValueType()
+    val yValueType = curve.getMetadata().getYValueType()
 
     println(s"name: $name")
     println(s"interpolator: $interpolator, leftExtrapolator: $leftExtrapolator, rightExtrapolator: $rightExtrapolator")
-    println(s"dayCount: $dayCount")
+    println(s"dayCount: $dayCount, xValueType: $xValueType, yValueType: $yValueType")
 
     val xValues = curve.getXValues()
     val yValues = curve.getYValues()
