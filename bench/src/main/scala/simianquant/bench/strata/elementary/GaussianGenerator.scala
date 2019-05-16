@@ -1,4 +1,4 @@
-package simianquant.bench.strata.atomic
+package simianquant.bench.strata.elementary
 
 import com.opengamma.strata.math.impl.cern.{MersenneTwister64, Normal}
 import org.apache.commons.math3.random.{MersenneTwister => ACM64}

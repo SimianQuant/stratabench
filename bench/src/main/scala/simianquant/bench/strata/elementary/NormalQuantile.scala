@@ -1,4 +1,4 @@
-package simianquant.bench.strata.atomic
+package simianquant.bench.strata.elementary
 
 import com.opengamma.strata.math.impl.cern.Probability
 import java.util.concurrent.TimeUnit
@@ -7,12 +7,12 @@ import org.openjdk.jmh.annotations._
 import simianquant.mathbridge.NormalDistribution
 import simianquant.strata.jnibridge.AtomicFunction
 
-object NormalCdf {
+object NormalQuantile {
 
   @State(Scope.Benchmark)
   class EvalLimits {
-    val lb = -4.0
-    val ub = 4.0
+    val lb = 0.01
+    val ub = 0.99
     val cnt = 1 << 16
   }
 
@@ -22,23 +22,23 @@ object NormalCdf {
   }
 }
 
-/** Benchmarks three variations of the implementation of Normal Cumulative Distribution Function by measuring the time
-  * taken to evaluate 65536 values.
+/** Benchmarks three variations of the implementation of Normal Quantile function by measuring the time taken to
+  * evaluate the function for 65536 values.
   *
   * @author Harshad Deo
   */
 @BenchmarkMode(Array(Mode.SampleTime))
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-class NormalCdf {
+class NormalQuantile {
 
-  import NormalCdf._
+  import NormalQuantile._
 
   @Benchmark
   def strata(lim: EvalLimits, bh: Blackhole): Unit = {
     var x = lim.lb
     val xincr = (lim.ub - lim.lb) / lim.cnt
     while (x < lim.ub) {
-      bh.consume(Probability.normal(0, 1, x))
+      bh.consume(Probability.normalInverse(x))
       x += xincr
     }
   }
@@ -48,7 +48,7 @@ class NormalCdf {
     var x = lim.lb
     val xincr = (lim.ub - lim.lb) / lim.cnt
     while (x < lim.ub) {
-      bh.consume(NormalDistribution.cdf(x))
+      bh.consume(NormalDistribution.quantile(x))
       x += xincr
     }
   }
@@ -58,7 +58,7 @@ class NormalCdf {
     var x = lim.lb
     val xincr = (lim.ub - lim.lb) / lim.cnt
     while (x < lim.ub) {
-      bh.consume(afi.value.normalCdf(x))
+      bh.consume(afi.value.normalQuantile(x))
       x += xincr
     }
   }
