@@ -1,5 +1,6 @@
 object Settings {
   object versions {
+    val commonsMath: String = "3.6.1"
     val log4jslf4j: String = "2.11.2"
     val mathbridge: String = "0.2.3"
     val project: String = "0.1.0-SNAPSHOT"

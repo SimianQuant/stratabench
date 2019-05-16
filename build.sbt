@@ -34,8 +34,12 @@ lazy val setup = project
       "org.apache.logging.log4j" % "log4j-slf4j-impl" % Settings.versions.log4jslf4j,
       "com.opengamma.strata" % "strata-measure" % Settings.versions.strata,
       "com.opengamma.strata" % "strata-report" % Settings.versions.strata,
-      "com.opengamma.strata" % "strata-loader" % Settings.versions.strata
-    )
+      "com.opengamma.strata" % "strata-loader" % Settings.versions.strata,
+      "org.apache.commons" % "commons-math3" % Settings.versions.commonsMath % Test,
+      "org.scalatest" %% "scalatest" % Settings.versions.scalatest % Test,
+      "org.scalacheck" %% "scalacheck" % Settings.versions.scalacheck % Test
+    ),
+    testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
   )
 
 lazy val jnibridge = project
