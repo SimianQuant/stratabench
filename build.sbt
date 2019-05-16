@@ -31,6 +31,7 @@ lazy val setup = project
   .settings(commonSettings("setup"))
   .settings(
     libraryDependencies ++= Seq(
+      "org.apache.logging.log4j" % "log4j-slf4j-impl" % Settings.versions.log4jslf4j,
       "com.opengamma.strata" % "strata-measure" % Settings.versions.strata,
       "com.opengamma.strata" % "strata-report" % Settings.versions.strata,
       "com.opengamma.strata" % "strata-loader" % Settings.versions.strata
