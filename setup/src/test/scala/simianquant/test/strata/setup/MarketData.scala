@@ -1,9 +1,13 @@
 package simianquant.test.strata.setup
 
+import com.opengamma.strata.basics.date.DayCounts
+import java.time.LocalDate
+import simianquant.strata.setup.Constants
+
 object MarketData {
 
   object FxRate {
-    val GPBUSD: Double = 1.61
+    val GBPUSD: Double = 1.61
   }
 
   private val usdDiscYf = Array(0.002739726027397, 0.09041095890411, 0.167123287671233, 0.252054794520548,
@@ -46,17 +50,20 @@ object MarketData {
     0.017822649, 0.021709401, 0.025521059, 0.027335798, 0.029219998, 0.030936921, 0.031693336, 0.032010599)
   private val usd3MInterp = new ACMInterpolatorFlatExtrapolator(usd3MYf, usd3MZero)
 
+  private val dayCount = DayCounts.ACT_ACT_ISDA
+  def yf(terminalDate: LocalDate): Double = dayCount.yearFraction(Constants.valuationDate, terminalDate)
+
   object Zero {
 
-    def usdDisc(yf: Double): Double = usdDiscInterp(yf)
+    def usdDisc(terminalDate: LocalDate): Double = usdDiscInterp(yf(terminalDate))
 
-    def gbpDisc(yf: Double): Double = gbpDiscInterp(yf)
+    def gbpDisc(terminalDate: LocalDate): Double = gbpDiscInterp(yf(terminalDate))
 
-    def gbp3M(yf: Double): Double = gbp3MInterp(yf)
+    def gbp3M(terminalDate: LocalDate): Double = gbp3MInterp(yf(terminalDate))
 
-    def usd6M(yf: Double): Double = usd6MInterp(yf)
+    def usd6M(terminalDate: LocalDate): Double = usd6MInterp(yf(terminalDate))
 
-    def usd3M(yf: Double): Double = usd3MInterp(yf)
+    def usd3M(terminalDate: LocalDate): Double = usd3MInterp(yf(terminalDate))
 
   }
 

@@ -19,7 +19,7 @@ object MarketDataPrinter {
 
   var prev = false
 
-  def printInterpolatedCurve(curve: InterpolatedNodalCurve) = {
+  def printInterpolatedCurve(curve: InterpolatedNodalCurve, curveGroupName: String) = {
     if (prev) {
       println("----------------------------------")
     }
@@ -31,7 +31,7 @@ object MarketDataPrinter {
     val xValueType = curve.getMetadata().getXValueType()
     val yValueType = curve.getMetadata().getYValueType()
 
-    println(s"name: $name")
+    println(s"name: $name, group: $curveGroupName")
     println(s"interpolator: $interpolator, leftExtrapolator: $leftExtrapolator, rightExtrapolator: $rightExtrapolator")
     println(s"dayCount: $dayCount, xValueType: $xValueType, yValueType: $yValueType")
 
@@ -55,10 +55,10 @@ object MarketDataPrinter {
 
     printHeader("Curves")
     ids foreach {
-      case x: CurveId =>
-        val curve = marketData.findValue(x).get
+      case curveId: CurveId =>
+        val curve = marketData.findValue(curveId).get
         curve match {
-          case x: InterpolatedNodalCurve => printInterpolatedCurve(x)
+          case x: InterpolatedNodalCurve => printInterpolatedCurve(x, curveId.getCurveGroupName().toString())
           case _                         => println(s"Printing of ${curve.getName()} is not supported")
         }
       case _ => ()
