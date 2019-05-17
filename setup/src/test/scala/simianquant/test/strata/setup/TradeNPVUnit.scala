@@ -22,8 +22,8 @@ final class TradeNPVUnit extends FlatSpec {
 
   private val runner = CalculationRunner.ofMultiThreaded()
 
-  private val trades = ImmutableList.of(SampleTrades.fxForward)
-  // ImmutableList.of(SampleTrades.fxForward, SampleTrades.fxSwap, SampleTrades.fra, SampleTrades.bullet)
+  private val trades = ImmutableList.of(SampleTrades.bullet)
+
   private val columns = ImmutableList.of(Column.of(Measures.PRESENT_VALUE))
 
   private val results = runner.calculate(rules, trades, columns, marketData, refData)
