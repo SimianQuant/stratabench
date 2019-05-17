@@ -6,7 +6,7 @@ import simianquant.strata.setup.Constants
 
 object MarketData {
 
-  object FxRate {
+  object FxSpot {
     val GBPUSD: Double = 1.61
   }
 
@@ -55,22 +55,34 @@ object MarketData {
   def yf(terminalDate: LocalDate): Double = dayCount.yearFraction(Constants.valuationDate, terminalDate)
 
   object Zero {
-
     def usdDisc(t: Double): Double = usdDiscInterp(t)
-    def usdDisc(terminalDate: LocalDate): Double = usdDiscInterp(yf(terminalDate))
-
     def gbpDisc(t: Double): Double = gbpDiscInterp(t)
-    def gbpDisc(terminalDate: LocalDate): Double = gbpDiscInterp(yf(terminalDate))
-
     def gbp3M(t: Double): Double = gbp3MInterp(t)
-    def gbp3M(terminalDate: LocalDate): Double = gbp3MInterp(yf(terminalDate))
-
     def usd6M(t: Double): Double = usd6MInterp(t)
-    def usd6M(terminalDate: LocalDate): Double = usd6MInterp(yf(terminalDate))
-
     def usd3M(t: Double): Double = usd3MInterp(t)
-    def usd3M(terminalDate: LocalDate): Double = usd3MInterp(yf(terminalDate))
+  }
 
+  object Df {
+    def usdDisc(date: LocalDate): Double = {
+      val t = yf(date)
+      math.exp(-usdDiscInterp(t) * t)
+    }
+    def gbpDisc(date: LocalDate): Double = {
+      val t = yf(date)
+      math.exp(-gbpDiscInterp(t) * t)
+    }
+    def gbp3M(date: LocalDate): Double = {
+      val t = yf(date)
+      math.exp(-gbp3MInterp(t) * t)
+    }
+    def usd6M(date: LocalDate): Double = {
+      val t = yf(date)
+      math.exp(-usd6MInterp(t) * t)
+    }
+    def usd3M(date: LocalDate): Double = {
+      val t = yf(date)
+      math.exp(-usd3MInterp(t) * t)
+    }
   }
 
 }
