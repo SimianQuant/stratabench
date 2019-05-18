@@ -127,7 +127,7 @@ object SampleTrades {
   }
 
   // create a libor 3m vs libor 6m basis swap with spread
-  def basisLibor3mVsLibor6mWithSpreadSwap: Trade = {
+  def basisLibor3mVsLibor6mWithSpreadSwap: SwapTrade = {
     val notional = NotionalSchedule.of(Currency.USD, 100000000);
 
     val payLeg = RateCalculationSwapLeg
@@ -192,7 +192,7 @@ object SampleTrades {
   }
 
   // Create an overnight averaged vs libor 3m swap with spread
-  def overnightAveragedWithSpreadVsLibor3mSwap: Trade = {
+  def overnightAveragedWithSpreadVsLibor3mSwap: SwapTrade = {
     val notional = NotionalSchedule.of(Currency.USD, 100000000)
 
     val payLeg = RateCalculationSwapLeg

@@ -15,5 +15,6 @@ case class FloatPaymentCoupon(notional: Double,
                               forecastEndDate: LocalDate,
                               forecastAccrual: Double,
                               paymentAccrual: Double,
+                              spread: Double,
                               paymentDate: LocalDate)
     extends Coupon
