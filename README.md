@@ -15,3 +15,4 @@ For convenience, the benchmarks are written in Scala using [sbt-jmh](https://git
 A summary of the results is presented on the SimianQuant blog.
 
 1. [Elementary Functions](https://simianquant.com/blog/stratabenchelementary/)
+1. [Black Formula](https://simianquant.com/blog/stratabenchblack/)
