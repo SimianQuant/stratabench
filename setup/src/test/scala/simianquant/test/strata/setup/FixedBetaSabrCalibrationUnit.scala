@@ -47,7 +47,31 @@ final class FixedBetaSabrCalibrationUnit extends FlatSpec {
   private val errors = DoubleArray.of(1e-8, 1e-8, 1e-8)
   private val initialParams = DoubleArray.of(0.1, 0.0, 1.0)
 
-  it should "pass beta = 1 calibration" in {
+  private def check(forward: Double,
+                    strikes: DoubleArray,
+                    timeToExpiry: Double,
+                    alpha: Double,
+                    beta: Double,
+                    rho: Double,
+                    nu: Double,
+                    impliedVols: DoubleArray): Boolean = {
+    var res = true
+    var ctr = 0
+    while (res && (ctr < 3)) {
+      val calc = SabrHaganVolatilityFunctionProvider.DEFAULT.volatility(forward,
+                                                                        strikes.get(ctr),
+                                                                        timeToExpiry,
+                                                                        alpha,
+                                                                        beta,
+                                                                        rho,
+                                                                        nu)
+      res = math.abs(calc - impliedVols.get(ctr)) < 1e-10
+      ctr += 1
+    }
+    res
+  }
+
+  it should "pass beta = 1 calibration - strata" in {
     inputs foreach {
       case Input(timeToExpiry, forward, strikes, impliedVols) =>
         val calibrator = new FixedBetaSabrModelFitter(1, forward, strikes, timeToExpiry, impliedVols, errors)
@@ -56,23 +80,12 @@ final class FixedBetaSabrCalibrationUnit extends FlatSpec {
         val rho = solved.get(1)
         val nu = solved.get(2)
 
-        var ctr = 0
-        while (ctr < 3) {
-          val calc = SabrHaganVolatilityFunctionProvider.DEFAULT.volatility(forward,
-                                                                            strikes.get(ctr),
-                                                                            timeToExpiry,
-                                                                            alpha,
-                                                                            1,
-                                                                            rho,
-                                                                            nu)
-          val error = math.abs(calc - impliedVols.get(ctr))
-          assert(error < 1e-8)
-          ctr += 1
-        }
+        val res = check(forward, strikes, timeToExpiry, alpha, 1, rho, nu, impliedVols)
+        assert(res)
     }
   }
 
-  it should "pass beat = 0.5 calibration" in {
+  it should "pass beat = 0.5 calibration - strata" in {
     inputs foreach {
       case Input(timeToExpiry, forward, strikes, impliedVols) =>
         val calibrator = new FixedBetaSabrModelFitter(0.5, forward, strikes, timeToExpiry, impliedVols, errors)
@@ -81,19 +94,8 @@ final class FixedBetaSabrCalibrationUnit extends FlatSpec {
         val rho = solved.get(1)
         val nu = solved.get(2)
 
-        var ctr = 0
-        while (ctr < 3) {
-          val calc = SabrHaganVolatilityFunctionProvider.DEFAULT.volatility(forward,
-                                                                            strikes.get(ctr),
-                                                                            timeToExpiry,
-                                                                            alpha,
-                                                                            0.5,
-                                                                            rho,
-                                                                            nu)
-          val error = math.abs(calc - impliedVols.get(ctr))
-          assert(error < 1e-8)
-          ctr += 1
-        }
+        val res = check(forward, strikes, timeToExpiry, alpha, 0.5, rho, nu, impliedVols)
+        assert(res)
     }
   }
 
