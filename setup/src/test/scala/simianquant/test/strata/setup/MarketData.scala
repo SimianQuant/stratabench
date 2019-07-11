@@ -3,6 +3,7 @@ package simianquant.test.strata.setup
 import com.opengamma.strata.basics.date.DayCounts
 import java.time.LocalDate
 import simianquant.strata.setup.Constants
+import simianquant.strata.setup.ACMInterpolatorFlatExtrapolator
 
 object MarketData {
 

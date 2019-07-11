@@ -6,7 +6,7 @@ import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalatest.prop.Checkers
 import org.scalatest.PropSpec
-import simianquant.strata.setup.InterpolatorWrapper
+import simianquant.strata.setup.{ACMInterpolatorFlatExtrapolator, InterpolatorWrapper}
 
 /** Validates that the wrappers are building the expected interpolators
   *

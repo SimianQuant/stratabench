@@ -35,7 +35,7 @@ lazy val setup = project
       "com.opengamma.strata" % "strata-measure" % Settings.versions.strata,
       "com.opengamma.strata" % "strata-report" % Settings.versions.strata,
       "com.opengamma.strata" % "strata-loader" % Settings.versions.strata,
-      "org.apache.commons" % "commons-math3" % Settings.versions.commonsMath % Test,
+      "org.apache.commons" % "commons-math3" % Settings.versions.commonsMath,
       "org.scalatest" %% "scalatest" % Settings.versions.scalatest % Test,
       "org.scalacheck" %% "scalacheck" % Settings.versions.scalacheck % Test
     ),
