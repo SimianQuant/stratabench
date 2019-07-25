@@ -3,6 +3,7 @@ package simianquant.bench.strata.interp
 import java.util.concurrent.TimeUnit
 import org.openjdk.jmh.infra.Blackhole
 import org.openjdk.jmh.annotations._
+import com.opengamma.strata.basics.value.ValueDerivatives
 import simianquant.strata.setup.{ACMInterpolatorFlatExtrapolator, InterpolatorWrapper}
 
 object CubicSpline {
@@ -54,7 +55,9 @@ class CubicSpline {
     var ctr = 0
     while (ctr < data.xs.length) {
       val x = data.xs(ctr)
-      bh.consume(interp.instance.parameterSensitivity(x))
+      val value = interp.instance.interpolate(x)
+      val sens = interp.instance.parameterSensitivity(x)
+      bh.consume(ValueDerivatives.of(value, sens))
       ctr += 1
     }
   }
