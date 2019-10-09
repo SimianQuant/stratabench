@@ -6,7 +6,7 @@ import org.openjdk.jmh.annotations._
 import com.opengamma.strata.basics.value.ValueDerivatives
 import simianquant.strata.setup.{ACMInterpolatorFlatExtrapolator, InterpolatorWrapper}
 
-object Linear {
+object MonoLinear {
 
   @State(Scope.Benchmark)
   class StrataInterp {
@@ -26,9 +26,9 @@ object Linear {
   */
 @BenchmarkMode(Array(Mode.SampleTime))
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-class Linear {
+class MonoLinear {
 
-  import Linear._
+  import MonoLinear._
 
   @Benchmark
   def value(interp: StrataInterp, data: InterpolationData1D.Data, bh: Blackhole): Unit = {
